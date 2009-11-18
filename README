@@ -1,0 +1,42 @@
+= YAML Twitter OAuth
+
+YAML Twitter OAuth makes it easy to keep track of your Twitter OAuth
+consumer tokens and secrets declaratively using YAML. It is designed for
+applications that either:
+
+  1. Need to maintain multiple Consumer Key/Secret pairs for different environments
+  2. Need to change the secret from time to time and wwant to do so in YML instead of code
+
+Install with:
+
+  script/plugin install git://github.com/peteonrails/yaml_twitter_oath.git
+
+To use, simply create a <tt>config/twitter_oauth.yml</tt> file that follows the sample 
+pattern below. (A sample twitter_oauth.yml template file is found in the templates/ 
+directory of this plugin.)
+
+Sample:
+
+  defaults: &defaults
+    request_token_url: http://twitter.com/oauth/request_token
+    access_token_url: http://twitter.com/oauth/access_token
+    authorize_url: http://twitter.com/oauth/authorize
+  
+  development:
+    <<: *defaults
+    consumer_key: 12345678
+    consumer_secret: this-is-your-application-secret
+
+  staging:
+    <<: *defaults
+    consumer_key: 12345678
+    consumer_secret: this-is-your-application-secret
+  
+  production:
+    <<: *defaults
+    consumer_key: 12345678
+    consumer_secret: this-is-your-application-secret
+
+Then in your client code that you use to generate Request and Access Tokens, you can do this: 
+  
+  Twitter::OAuth.new(YamlTwitter.oauth[:consumer_key], YamlTwitter.oauth[:consumer_secret])

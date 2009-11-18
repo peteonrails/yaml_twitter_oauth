@@ -1,0 +1,19 @@
+defaults: &defaults
+  request_token_url: http://twitter.com/oauth/request_token
+  access_token_url: http://twitter.com/oauth/access_token
+  authorize_url: http://twitter.com/oauth/authorize
+
+development:
+  <<: *defaults
+  consumer_key: 12345678
+  consumer_secret: this-is-your-application-secret
+
+staging:
+  <<: *defaults
+  consumer_key: 12345678
+  consumer_secret: this-is-your-application-secret
+
+production:
+  <<: *defaults
+  consumer_key: 12345678
+  consumer_secret: this-is-your-application-secret
