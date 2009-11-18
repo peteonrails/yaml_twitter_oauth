@@ -9,7 +9,7 @@ applications that either:
 
 Install with:
 
-  script/plugin install git://github.com/peteonrails/yaml_twitter_oath.git
+  script/plugin install git://github.com/peteonrails/yaml_twitter_oauth.git
 
 To use, simply create a <tt>config/twitter_oauth.yml</tt> file that follows the sample 
 pattern below. (A sample twitter_oauth.yml template file is found in the templates/ 
