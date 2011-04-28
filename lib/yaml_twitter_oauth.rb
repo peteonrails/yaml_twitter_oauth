@@ -4,7 +4,7 @@ class YamlTwitter
 end
 
 if Rails.env != 'test'
-  c = YAML::load(File.open("#{Rails.root.to_s}/config/twitter_oauth.yml"))
+  c = YAML::load_file(File.join(Rails.root, 'config','twitter_oauth.yml'))
     
   YamlTwitter.oauth = {
     :request_token_url => c[Rails.env]['request_token_url'],
