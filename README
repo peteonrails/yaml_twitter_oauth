@@ -65,6 +65,7 @@ development:
     consumer_secret: this-is-your-application-secret
 
 test:
+  twitter:
     request_token_url: http://twitter.com/oauth/request_token
     access_token_url: http://twitter.com/oauth/access_token
     authorize_url: http://twitter.com/oauth/authorize
