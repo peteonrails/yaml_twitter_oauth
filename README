@@ -2,9 +2,9 @@
 
 There are now better choices for capturing this functionality within config.yml in Rails apps.
 The pattern is now to use a monolithic config.yml file and load it with an initializer. It has the
-benefot of letting you set application and environment specific config parameters other than Twitter creds.
+benefit of letting you set application and environment specific config parameters other than Twitter creds.
   
-This plugin will be maintained until at least Rails 5, but it is not that useful anymore. See below for a better way 
+This plugin will be maintained until at least Rails 5, but it is not that useful anymore. See below for a better 
 implementation. 
 
 = YAML Twitter OAuth
