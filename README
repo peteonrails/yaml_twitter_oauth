@@ -1,3 +1,12 @@
+= Important Note
+
+There are now better choices for capturing this functionality within config.yml in Rails apps.
+The pattern is now to use a monolithic config.yml file and load it with an initializer. It has the
+benefot of letting you set application and environment specific config parameters other than Twitter creds.
+  
+This plugin will be maintained until at least Rails 5, but it is not that useful anymore. See below for a better way 
+implementation. 
+
 = YAML Twitter OAuth
 
 YAML Twitter OAuth makes it easy to keep track of your Twitter OAuth
@@ -40,3 +49,37 @@ Sample:
 Then in your client code that you use to generate Request and Access Tokens, you can do this: 
   
   Twitter::OAuth.new(YamlTwitter.oauth[:consumer_key], YamlTwitter.oauth[:consumer_secret])
+
+= Using Rails with config/config.yml instead
+
+The convention has become to use a config/config.yml file to configure application specific 
+settings. To duplicate the functionality of this plugin, create a config.yml like this (also found
+in the file templates/config.yml.example). 
+
+development:
+  twitter:
+    request_token_url: http://twitter.com/oauth/request_token
+    access_token_url: http://twitter.com/oauth/access_token
+    authorize_url: http://twitter.com/oauth/authorize
+    consumer_key: 12345678
+    consumer_secret: this-is-your-application-secret
+
+test:
+    request_token_url: http://twitter.com/oauth/request_token
+    access_token_url: http://twitter.com/oauth/access_token
+    authorize_url: http://twitter.com/oauth/authorize
+    consumer_key: 12345678
+    consumer_secret: this-is-your-application-secret
+
+Then, in the file config/initializers/load_config.rb:
+
+  APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
+
+Then, your code to authorize against Twitter could be: 
+
+  Twitter::OAuth.new(APP_CONFIG[:twitter][:consumer_key], APP_CONFIG[:twitter][[:consumer_secret])
+
+NOTE: This example was kept to map to the README example code. I'd recommend you check out OmniAuth 
+if you are authenticating aginst Twitter OAuth. 
+
+
